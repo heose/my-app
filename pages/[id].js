@@ -61,7 +61,7 @@ const POST = gql`
 export default function Company({ post }) {
   return (
     <div>
-      <span>{post.subject}</span>
+      <span>{post && post.subject && post.subject}</span>
     </div>
   );
 }
