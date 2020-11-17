@@ -61,7 +61,10 @@ const POST = gql`
 export default function Company({ post }) {
   return (
     <div>
-      <span>{post && post.subject && post.subject}</span>
+      {/* <span>{post && post.subject && post.subject}</span> */}
+      <div>{post.id}</div>
+      <div>{post.subject}</div>
+      <div>{post.type}</div>
     </div>
   );
 }
@@ -89,6 +92,7 @@ export async function getStaticProps({ params }) {
     props: { post },
     // Re-generate the post at most once per second
     // if a request comes in
+    notFound: !params.id,
     revalidate: 1,
   };
 }
