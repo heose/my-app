@@ -61,7 +61,6 @@ const POST = gql`
 export default function Company({ post }) {
   return (
     <div>
-      {/* <span>{post && post.subject && post.subject}</span> */}
       <div>{post.id}</div>
       <div>{post.subject}</div>
       <div>{post.type}</div>
@@ -72,27 +71,23 @@ export default function Company({ post }) {
 // This function gets called at build time
 export async function getStaticPaths() {
   return {
-    // Only `/posts/1` and `/posts/2` are generated at build time
     paths: [],
-    // Enable statically generating additional pages
-    // For example: `/posts/3`
-    fallback: true,
+    fallback: 'blocking',
   };
 }
 
 // This also gets called at build time
 export async function getStaticProps({ params }) {
-  console.log(params);
-  // params contains the post `id`.
-  // If the route is like /posts/1, then params.id is 1
-  const { post } = await fetcher(POST, { id: params.id });
-
-  // Pass post data to the page via props
-  return {
-    props: { post },
-    // Re-generate the post at most once per second
-    // if a request comes in
-    notFound: !params.id,
-    revalidate: 1,
-  };
+  try {
+    const { post } = await fetcher(POST, { id: params.id });
+    return {
+      props: { post },
+      revalidate: 10,
+    };
+  } catch (error) {
+    return {
+      props: {},
+      notFound: true,
+    };
+  }
 }
