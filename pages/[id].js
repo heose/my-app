@@ -70,7 +70,7 @@ export default function Company({ post }) {
 export async function getStaticPaths() {
   return {
     // Only `/posts/1` and `/posts/2` are generated at build time
-    paths: [{ params: { id: '18' } }, { params: { id: '19' } }],
+    paths: [],
     // Enable statically generating additional pages
     // For example: `/posts/3`
     fallback: true,
