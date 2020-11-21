@@ -82,7 +82,7 @@ export async function getStaticProps({ params }) {
     const { post } = await fetcher(POST, { id: params.id });
     return {
       props: { post },
-      revalidate: 10,
+      // revalidate: 10,
     };
   } catch (error) {
     return {
