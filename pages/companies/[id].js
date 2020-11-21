@@ -64,6 +64,7 @@ export default function Company({ post }) {
       <div>{post.id}</div>
       <div>{post.subject}</div>
       <div>{post.type}</div>
+      <div>{post.createdAt}</div>
     </div>
   );
 }
